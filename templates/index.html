@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Master Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { 
+            --primary: #4F46E5; 
+            --primary-hover: #4338CA;
+            --bg: #F9FAFB; 
+            --card: #ffffff;
+            --text-main: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        * { box-sizing: border_box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--bg); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 40px 20px;
+        }
+        
+        /* হেডার ডিজাইন */
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { color: var(--text-main); font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; letter-spacing: -1px; }
+        .header span { color: var(--primary); }
+        .header p { color: var(--text-light); font-size: 1rem; }
+
+        /* মেইন গ্রিড লেআউট */
+        .container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            width: 100%; 
+            max-width: 1100px; 
+        }
+
+        /* টুল কার্ড ডিজাইন */
+        .tool-card { 
+            background: var(--card); 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); 
+            transition: 0.3s; 
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.1); 
+            border-color: var(--primary);
+        }
+        
+        /* আইকন */
+        .icon-box { 
+            width: 55px; 
+            height: 55px; 
+            background: #EEF2FF; 
+            color: var(--primary); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 15px; 
+            font-size: 1.5rem; 
+            margin-bottom: 20px; 
+        }
+        
+        h2 { font-size: 1.25rem; color: var(--text-main); margin-bottom: 20px; font-weight: 700; }
+        
+        form { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        
+        /* ইনপুট ফিল্ড ফিক্স */
+        input[type="file"] { 
+            border: 2px dashed var(--border); 
+            padding: 20px; 
+            border-radius: 12px; 
+            width: 100%;
+            max-width: 100%;
+            cursor: pointer; 
+            background: #F9FAFB;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        input[type="file"]:hover {
+            border-color: var(--primary);
+            background: #EEF2FF;
+        }
+        
+        select, input[type="number"] { 
+            padding: 14px; 
+            border: 1px solid var(--border); 
+            border-radius: 10px; 
+            outline: none; 
+            width: 100%;
+            font-size: 0.95rem;
+            background: white;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+
+        select:focus, input[type="number"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+        
+        /* রিসাইজ ইনপুট ফিক্স */
+        .resize-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .resize-row input {
+            width: 50%;
+        }
+
+        button { 
+            background: var(--primary); 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 10px; 
+            font-weight: 600; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            margin-top: 5px;
+        }
+        button:hover { 
+            background: var(--primary-hover); 
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+        }
+
+        .ad-space { 
+            width: 100%; 
+            max-width: 728px; 
+            height: 90px; 
+            background: #E5E7EB; 
+            margin: 30px 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #9CA3AF; 
+            border-radius: 10px; 
+            font-size: 0.9rem;
+        }
+
+        /* ফুটার আপডেট (হাইলাইট সরানো হয়েছে) */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            width: 100%;
+            max-width: 1100px;
+        }
+        
+        .developer-name {
+            color: inherit; /* কোনো কালার থাকবে না, সাধারণ লেখার মতো হবে */
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .container { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Image <span>Master</span> Tools</h1>
+        <p>100% Free • Secure • Fast Processing</p>
+    </div>
+
+    <!-- Ad Placeholder -->
+    <div class="ad-space">Google AdSense Space (728x90)</div>
+
+    <div class="container">
+        
+        <!-- Tool 1: Converter -->
+        <div class="tool-card">
+            <div class="icon-box"><i class="fas fa-exchange-alt"></i></div>
+            <h2>Image Converter</h2>
+            <form action="/process-image" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="convert">
+                <input type="file" name="image" required accept="image/*">
+                <select name="format">
+                    <option value="JPEG">Convert to JPG</option>
+                    <option value="PNG">Convert to PNG</option>
+                    <option value="WEBP">Convert to WebP</option>
+                </select>
+                <button type="submit">Convert & Download</button>
+            </form>
+        </div>
+
+        <!-- Tool 2: Resizer -->
+        <div class="tool-card">
+            <div class="icon-box"><i class="fas fa-expand"></i></div>
+            <h2>Image Resizer</h2>
+            <form action="/process-image" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="resize">
+                <input type="file" name="image" required accept="image/*">
+                
+                <div class="resize-row">
+                    <input type="number" name="width" placeholder="Width (px)" required>
+                    <input type="number" name="height" placeholder="Height (px)" required>
+                </div>
+                
+                <button type="submit">Resize Image</button>
+            </form>
+        </div>
+
+        <!-- Tool 3: Compressor -->
+        <div class="tool-card">
+            <div class="icon-box"><i class="fas fa-compress-arrows-alt"></i></div>
+            <h2>Image Compressor</h2>
+            <form action="/process-image" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="operation" value="compress">
+                <input type="file" name="image" required accept="image/*">
+                <select name="quality">
+                    <option value="80">Low Compression (Best Quality)</option>
+                    <option value="50">Medium Compression (Balanced)</option>
+                    <option value="20">High Compression (Small Size)</option>
+                </select>
+                <button type="submit">Compress Image</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="ad-space" style="margin-top: 50px;">Google AdSense Space (Responsive)</div>
+
+    <div class="footer">
+        Developed & Designed by <span class="developer-name">Kafi</span> <br>
+        © 2025 All Rights Reserved
+    </div>
+
+</body>
+</html>
